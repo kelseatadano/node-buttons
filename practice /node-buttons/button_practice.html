@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel = "stylesheet" href = "style.css">
+</head>
+<body>
+
+<!-- Button that triggers the text box -->
+<button id="showTextBox">Click me to edit text</button>
+
+<!-- Button to save the content of the text box -->
+<button id="saveButton" style="display: none;">Save Text</button>
+
+<button id="hideButton" style = "display: none;"> Hide </button>
+<!-- Editable text box (which is hidden initially) -->
+<div>
+  <textarea id="textBox" placeholder="Edit your text here"></textarea>
+  <style> 
+  #textBox {
+    display: none; /* Initially hidden */
+    width: 300px;
+    height: 100px;
+    resize: both;
+    overflow: auto;
+
+        }
+  </style>
+</div>
+
+<script>
+  // javascript 
+  const showTextBoxButton = document.getElementById("showTextBox");
+  const textBox = document.getElementById("textBox");
+  const saveButton = document.getElementById("saveButton");
+  const hideButton = document.getElementById("hideButton");
+
+  showTextBoxButton.addEventListener("dblclick", function() {
+    textBox.style.display = "block"; // Show the text box
+    saveButton.style.display = "inline"; // Show the save button
+    hideButton.style.display = "inline"; // show the hide button 
+  });
+
+  textBox.addEventListener("blur", function() {
+    textBox.style.display = "none"; // Hides the text box when focus is not there 
+    saveButton.style.display = "none"; // Hide the save button
+    hideButton.style.display = "none"; // hides the hide button 
+  });
+
+  saveButton.addEventListener("click", function() {
+    // Create a Blob containing the text content
+    const blob = new Blob([textBox.value], { type: "text/yaml" });
+
+    // Create a download link for the Blob
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "text_content.yaml"; // File name
+    a.click();
+
+    
+    URL.revokeObjectURL(url);
+  });
+
+
+  hideButton.addEventListener("click", function(){
+    textBox.style.display = "none";
+    saveButton.style.display = "none";
+    hideButton.style.display = "none";
+
+  });
+</script>
+
+</body>
+</html>

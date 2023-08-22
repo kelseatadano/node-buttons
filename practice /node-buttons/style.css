@@ -1,0 +1,13 @@
+#textBox {
+    display: none; /* Initially hidden */
+    width: 300px;
+    height: 100px;
+    resize: both;
+    overflow: auto;
+
+        }
+
+#saveButton {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
